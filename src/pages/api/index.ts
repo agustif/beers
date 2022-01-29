@@ -18,7 +18,9 @@ export default function handler(
   if (!temperature || !humans) {
     res.status(401).json({ error: missingParams})
   }
-
-  const beers = BeerOMeter(Number(temperature), Number(humans))
-  res.status(200).json({ beers: beers })
+  else {
+    
+    const beers = BeerOMeter(Number(temperature), Number(humans))
+    res.status(200).json({ beers: beers })
+  }
 }
