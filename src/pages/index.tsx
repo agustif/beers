@@ -1,22 +1,21 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
+import Head from "next/head";
 
-const Home: NextPage = () => {
+import { Anchor, Box, Heading } from "grommet";
+import React from "react";
+export default function Home() {
   return (
-    <div>
-      <Head>
-        <title>Beer Up!</title>
-        <meta name="description" content="Create your next meetup invitation, beer calculations included" />
-      </Head>
-
-      <main>
-        <h1>
-          Welcome to <a href="https://nextjs.org">BEERUP</a>
-        </h1>
-        </main>
-    </div>
-  )
+    <Box
+      flex
+      margin={{ horizontal: "auto" }}
+      width={{ max: "xlarge" }}
+      height={{ min: "100%" }}
+    >
+      <Box flex role="main" pad={{ vertical: "large" }}>
+        <Heading>
+          Welcome to <Anchor href="https://nextjs.org">BEER UP</Anchor> and{" "}
+          <Anchor href="https://v2.grommet.io">Grommet!</Anchor>
+        </Heading>
+      </Box>
+    </Box>
+  );
 }
-
-export default Home
