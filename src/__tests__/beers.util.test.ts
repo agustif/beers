@@ -11,6 +11,7 @@ describe("Beer-o-meter expects a temperature and number of people, returns numbe
     expect(beers).toBe(6);
   });
 
+
   it("serve 12 beers for 6 people at 23 degrees", () => {
     const beers = BeerOMeter(23, 6);
     expect(beers).toBe(12);
@@ -18,6 +19,11 @@ describe("Beer-o-meter expects a temperature and number of people, returns numbe
 
     it("serve 12 beers for 6 people at 24 degrees", () => {
     const beers = BeerOMeter(24, 6);
+    expect(beers).toBe(12);
+    });
+
+  it("serve 12 beers for 6 people at 20 degrees", () => {
+    const beers = BeerOMeter(20, 6);
     expect(beers).toBe(12);
   });
 
