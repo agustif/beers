@@ -1,8 +1,17 @@
-import { CheckBox, DateInput, FormField } from "grommet";
+import {
+  CalendarType,
+  CheckBox,
+  DateInput,
+  DropType,
+  FormField,
+} from "grommet";
 import { useState } from "react";
 
-const dateInputStyle = { maxWidth: "260px", padding: "small" };
-
+const dateInputStyle = { width: "300px", maxWidth: "320px", padding: "small" };
+const calendarProps: CalendarType = {
+  size: "medium",
+  alignSelf: "center",
+};
 const RangeOrDateInput = () => {
   const [checked, setChecked] = useState(false);
 
@@ -12,6 +21,9 @@ const RangeOrDateInput = () => {
       <FormField label={label}>
         {checked ? (
           <DateInput
+            size="large"
+            inline={true}
+            calendarProps={calendarProps}
             style={dateInputStyle}
             format={"mm/dd/yyyy-mm/dd/yyyy"}
             defaultValue={[
@@ -22,6 +34,9 @@ const RangeOrDateInput = () => {
           />
         ) : (
           <DateInput
+            size="large"
+            inline={true}
+            calendarProps={calendarProps}
             style={dateInputStyle}
             format={"mm/dd/yyyy"}
             defaultValue={new Date().toISOString()}

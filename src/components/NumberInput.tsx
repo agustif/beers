@@ -77,7 +77,7 @@ const NumberInput = ({}) => {
               fontWeight: 700,
               // paddingLeft: 5,
               fontSize: "1.2rem",
-              width: 100,
+              width: 50,
               border: "#ccc solid 5px",
               borderRadius: 50,
               textAlign: "center",

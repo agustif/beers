@@ -12,11 +12,13 @@ const Home = () => {
       direction="row"
       margin={{ horizontal: "auto" }}
       width={{ max: "100%" }}
-      height={{ min: "100%" }}
+      height={{ max: "100%" }}
+      overflow={{ vertical: "scroll" }}
     >
       <Sidebar
-        width={{ max: "100%", min: "300px" }}
-        height={{ min: "100%" }}
+        height={{ height: "100vh" }}
+        width={{ width: "400px", max: "420px", min: "280px" }}
+        // height={{ min: "100%" }}
         background="brand"
         round="medium"
         header={

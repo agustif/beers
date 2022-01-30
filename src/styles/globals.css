@@ -8,3 +8,11 @@ body {
 .mapboxgl-ctrl-logo {
     display: none !important;
 }
+.mapboxgl-ctrl-attrib {
+    display: none !important;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
