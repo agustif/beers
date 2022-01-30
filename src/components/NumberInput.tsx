@@ -1,5 +1,6 @@
 import { FormField, Box, Button } from "grommet";
 import { SetStateAction, useState } from "react";
+import { Group } from "grommet-icons";
 
 const MIN_VALUE = 2;
 const MAX_VALUE = 99;
@@ -7,6 +8,9 @@ const min = (
   value: number,
   setValue: { (value: SetStateAction<number>): void; (arg0: number): void }
 ) => {
+  if (value < 2 && value > 99) {
+    setValue(1);
+  }
   if (value <= MIN_VALUE) {
     window.alert("You can't have less than 2 people in a beer-ting");
   } else {
@@ -18,6 +22,9 @@ const max = (
   value: number,
   setValue: { (value: SetStateAction<number>): void; (arg0: number): void }
 ) => {
+  if (value < 2 && value > 99) {
+    setValue(1);
+  }
   if (value >= MAX_VALUE) {
     window.alert(
       "You can't have more than 99 people in a beer-ting, It's a party"
@@ -31,6 +38,9 @@ const minMax = (
   value: number,
   setValue: { (value: SetStateAction<number>): void; (arg0: number): void }
 ) => {
+  if (value < 2 && value > 99) {
+    setValue(1);
+  }
   if (value < MIN_VALUE) {
     window.alert(
       "You can't have less than 2 people in a beer-ting, It's a party"
@@ -61,7 +71,12 @@ const NumberInput = ({}) => {
           border: false,
           borderBottom: 0,
         }}
-        label="Participants"
+        label={
+          <Box direction="row" gap="small">
+            <Group />
+            Participants
+          </Box>
+        }
         labelProps={{ margin: false }}
       >
         <Box direction="row" gap="small">
@@ -72,6 +87,7 @@ const NumberInput = ({}) => {
             onClick={() => min(value, setValue)}
           />
           <input
+            readOnly
             style={{
               color: "purple",
               fontWeight: 700,
