@@ -1,0 +1,10 @@
+html,
+body {
+  /* background-color: #CF5885; */
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+.mapboxgl-ctrl-logo {
+    display: none !important;
+}
