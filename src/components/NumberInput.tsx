@@ -44,24 +44,25 @@ const minMax = (
   }
 };
 //  setValue(parseInt(e.target.value));
-const PeopleCountSelector = ({}) => {
+const NumberInput = ({}) => {
   const [value, setValue] = useState(2);
   return (
     <Box
       direction="row"
       border={{ color: "brand", size: "large" }}
-      pad="medium"
+      // pad="medium"
     >
       <FormField
-        contentProps={{ border: false, borderRadius: 20 }}
+        margin={"none"}
+        contentProps={{ margin: "none", border: false, borderRadius: 20 }}
         props={{
-          label: { margin: "none" },
+          label: { margin: false },
           borderRadius: 20,
           border: false,
           borderBottom: 0,
         }}
         label="Participants"
-        labelProps={{ margin: "none" }}
+        labelProps={{ margin: false }}
       >
         <Box direction="row" gap="small">
           <Button
@@ -74,9 +75,9 @@ const PeopleCountSelector = ({}) => {
             style={{
               color: "purple",
               fontWeight: 700,
-              paddingLeft: 15,
+              // paddingLeft: 5,
               fontSize: "1.2rem",
-              maxWidth: 40,
+              width: 100,
               border: "#ccc solid 5px",
               borderRadius: 50,
               textAlign: "center",
@@ -99,4 +100,4 @@ const PeopleCountSelector = ({}) => {
     </Box>
   );
 };
-export { PeopleCountSelector };
+export { NumberInput };

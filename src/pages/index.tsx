@@ -1,7 +1,18 @@
 import Head from "next/head";
-import { PeopleCountSelector } from "@/components/PeopleCountSelector";
+import { NumberInput } from "@/components/NumberInput";
+import { RangeOrDateInput } from "@/components/DateInput";
 
-import { Anchor, Avatar, Box, Button, Heading, Nav, Sidebar } from "grommet";
+import {
+  Anchor,
+  Avatar,
+  Box,
+  Button,
+  CheckBox,
+  FormField,
+  Heading,
+  Nav,
+  Sidebar,
+} from "grommet";
 import React from "react";
 export default function Home() {
   return (
@@ -13,10 +24,10 @@ export default function Home() {
       height={{ min: "100%" }}
     >
       <Sidebar
-        width={{ max: "100%", min: "320px" }}
+        width={{ max: "100%", min: "300px" }}
         height={{ min: "100%" }}
         background="brand"
-        round="small"
+        round="medium"
         header={
           <Box direction="row" align="center" gap="14px" alignSelf="center">
             <Avatar src="//upload.wikimedia.org/wikipedia/commons/9/9b/Emoji_u1f37b.svg" />
@@ -26,7 +37,13 @@ export default function Home() {
         // footer={<Button hoverIndicator />}
       >
         <Nav gap="small">
-          <PeopleCountSelector />
+          <NumberInput />
+          <FormField
+            contentProps={{ border: false }}
+            label="One ore more days?"
+          >
+            <RangeOrDateInput />
+          </FormField>
           {/* <Button hoverIndicator />
           <Button hoverIndicator /> */}
         </Nav>
