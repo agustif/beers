@@ -1,8 +1,8 @@
 import React, { useState, useRef, useCallback } from "react";
 import Geocoder from "react-map-gl-geocoder";
 import MapGL from "react-map-gl";
-import { FormField } from "grommet";
-
+import { Box, FormField } from "grommet";
+import { Location } from "grommet-icons";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 
@@ -35,7 +35,18 @@ const GeocoderInput = () => {
 
   return (
     <FormField
-      label="Where will be the meeting?"
+      label={
+        <Box
+          alignSelf="center"
+          direction="row"
+          gap="small"
+          pad="none"
+          style={{ marginBottom: 10 }}
+        >
+          <Location />
+          Location for the meeting
+        </Box>
+      }
       style={{ height: "200px", position: "relative" }}
     >
       <div style={{ height: "200px", position: "relative" }}>

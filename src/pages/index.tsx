@@ -4,6 +4,7 @@ import React from "react";
 import { NumberInput } from "@/components/NumberInput";
 import { RangeOrDateInput } from "@/components/DateInput";
 import { GeocoderInput } from "@/components/GeocoderInput";
+import { Clock } from "grommet-icons";
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
       overflow={{ vertical: "scroll" }}
     >
       <Sidebar
+        // elevation="large"
         height={{ height: "100vh" }}
         width={{ width: "400px", max: "420px", min: "280px" }}
         // height={{ min: "100%" }}
@@ -31,12 +33,16 @@ const Home = () => {
         <Nav gap="small">
           <NumberInput />
           <GeocoderInput />
-          <FormField
+          {/* <FormField
             contentProps={{ border: false }}
-            label="One ore more days?"
-          >
-            <RangeOrDateInput />
-          </FormField>
+            label={
+              <Box gap="small" direction="row">
+                <Clock />
+                One ore more days?
+              </Box>
+            }
+          ></FormField> */}
+          <RangeOrDateInput />
         </Nav>
       </Sidebar>
     </Box>

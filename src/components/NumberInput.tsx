@@ -8,9 +8,6 @@ const min = (
   value: number,
   setValue: { (value: SetStateAction<number>): void; (arg0: number): void }
 ) => {
-  if (value < 2 && value > 99) {
-    setValue(1);
-  }
   if (value <= MIN_VALUE) {
     window.alert("You can't have less than 2 people in a beer-ting");
   } else {
@@ -22,9 +19,6 @@ const max = (
   value: number,
   setValue: { (value: SetStateAction<number>): void; (arg0: number): void }
 ) => {
-  if (value < 2 && value > 99) {
-    setValue(1);
-  }
   if (value >= MAX_VALUE) {
     window.alert(
       "You can't have more than 99 people in a beer-ting, It's a party"
@@ -38,9 +32,6 @@ const minMax = (
   value: number,
   setValue: { (value: SetStateAction<number>): void; (arg0: number): void }
 ) => {
-  if (value < 2 && value > 99) {
-    setValue(1);
-  }
   if (value < MIN_VALUE) {
     window.alert(
       "You can't have less than 2 people in a beer-ting, It's a party"
@@ -53,26 +44,27 @@ const minMax = (
     setValue(value);
   }
 };
-//  setValue(parseInt(e.target.value));
+
 const NumberInput = ({}) => {
   const [value, setValue] = useState(2);
+  const onKeyDown = (e: { key: string }) => {
+    if (e.key == "ArrowUp" || e.key == "ArrowRight") {
+      max(value, setValue);
+    } else if (e.key == "ArrowDown" || e.key == "ArrowLeft") {
+      min(value, setValue);
+    }
+  };
   return (
-    <Box
-      direction="row"
-      border={{ color: "brand", size: "large" }}
-      // pad="medium"
-    >
+    <Box alignSelf="center" direction="row">
       <FormField
-        margin={"none"}
         contentProps={{ margin: "none", border: false, borderRadius: 20 }}
         props={{
-          label: { margin: false },
           borderRadius: 20,
           border: false,
           borderBottom: 0,
         }}
         label={
-          <Box direction="row" gap="small">
+          <Box direction="row" gap="small" pad="small">
             <Group />
             Participants
           </Box>
@@ -87,6 +79,7 @@ const NumberInput = ({}) => {
             onClick={() => min(value, setValue)}
           />
           <input
+            onKeyDown={onKeyDown}
             readOnly
             style={{
               color: "purple",
