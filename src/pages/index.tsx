@@ -5,7 +5,7 @@ import { NumberInput } from "@/components/NumberInput";
 import { RangeOrDateInput } from "@/components/DateInput";
 import { GeocoderInput } from "@/components/GeocoderInput";
 import { Clock } from "grommet-icons";
-
+import { Forecast } from "@/components/Forecast";
 const Home = () => {
   return (
     <Box
@@ -45,6 +45,7 @@ const Home = () => {
           <RangeOrDateInput />
         </Nav>
       </Sidebar>
+      <Forecast />
     </Box>
   );
 };
