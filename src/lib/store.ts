@@ -12,9 +12,8 @@ type UseStoreState = typeof initializeStore extends (
   ? T
   : never;
 
-const initialState = {
-  lastUpdate: 0,
-  light: false,
+  const initialState = {
+  beers: 0,
   participants: 2,
   location: { lat: 0, lon: 0 },
   date: new Date().toISOString(),

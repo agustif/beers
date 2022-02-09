@@ -5,20 +5,22 @@ import { useWeather } from "@/hooks/useWeather";
 import { useStore } from "@/lib/store";
 
 const useShallowStore = () => {
-  const { location, date, reset } = useStore(
+  const { beers, participants, location, date, reset } = useStore(
     (store) => ({
       location: store.location,
       date: store.date,
+      participants: store.participants,
       reset: store.reset,
+      beers: store.beers,
     }),
     shallow
   );
 
-  return { location, date, reset };
+  return { participants, location, date, beers, reset };
 };
 
 export const Forecast = () => {
-  const { location, date } = useShallowStore();
+  const { location, date, participants, beers } = useShallowStore();
 
   const { weather, error, loading } = useWeather({
     lat: location.lat,
@@ -32,7 +34,12 @@ export const Forecast = () => {
     return <div>Consulting weather api...</div>;
   }
   const temp = weather.daily[0].temp?.day;
-  if (weather) return <Box>Forecast {temp}</Box>;
+  if (weather)
+    return (
+      <Box>
+        Forecast {temp} ºC, for {participants} participants, bring {beers} beers
+      </Box>
+    );
   return <Box>No forecast</Box>;
 };
 
