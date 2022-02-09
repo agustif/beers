@@ -1,11 +1,4 @@
-import {
-  Box,
-  CalendarType,
-  CheckBox,
-  DateInput,
-  DropType,
-  FormField,
-} from "grommet";
+import { Box, CalendarType, CheckBox, DateInput, FormField } from "grommet";
 import { FormSchedule } from "grommet-icons";
 import { useState } from "react";
 

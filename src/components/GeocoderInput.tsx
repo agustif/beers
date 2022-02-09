@@ -5,9 +5,12 @@ import { Box, FormField } from "grommet";
 import { Location } from "grommet-icons";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
+import { useStore } from "@/lib/store";
 
 const MAPBOX_API_ACCESS_TOKEN = process.env.MAPBOX_API_ACCESS_TOKEN;
 const GeocoderInput = () => {
+  const { setLocation } = useStore();
+
   const [viewport, setViewport] = useState({
     latitude: 37.7577,
     longitude: -122.4376,
@@ -15,15 +18,15 @@ const GeocoderInput = () => {
   });
   const geocoderContainerRef = useRef();
   const mapRef = useRef();
-  const handleViewportChange = useCallback(
-    (newViewport) => setViewport(newViewport),
-    []
-  );
+  const handleViewportChange = useCallback((newViewport) => {
+    setViewport(newViewport);
+    setLocation({ lat: newViewport.latitude, lon: newViewport.longitude });
+  }, []);
 
   // if you are happy with Geocoder default settings, you can just use handleViewportChange directly
   const handleGeocoderViewportChange = useCallback(
     (newViewport) => {
-      const geocoderDefaultOverrides = { transitionDuration: 1000 };
+      const geocoderDefaultOverrides = { transitionDuration: 0 };
 
       return handleViewportChange({
         ...newViewport,

@@ -1,14 +1,16 @@
 import type { AppProps } from "next/app";
 import { grommet, Grommet } from "grommet";
 
+import { useCreateStore, Provider } from "@/lib/store";
 import "../styles/globals.css";
 
-function MyApp({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: AppProps) {
+  const createStore = useCreateStore(pageProps.initialZustandState);
   return (
-    <Grommet theme={grommet}>
-      <Component {...pageProps} />
-    </Grommet>
+    <Provider createStore={createStore}>
+      <Grommet theme={grommet}>
+        <Component {...pageProps} />
+      </Grommet>
+    </Provider>
   );
 }
-
-export default MyApp;

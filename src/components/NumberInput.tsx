@@ -1,59 +1,44 @@
 import { FormField, Box, Button } from "grommet";
-import { SetStateAction, useState } from "react";
+import shallow from "zustand/shallow";
 import { Group } from "grommet-icons";
 
-const MIN_VALUE = 2;
-const MAX_VALUE = 99;
-const min = (
-  value: number,
-  setValue: { (value: SetStateAction<number>): void; (arg0: number): void }
-) => {
-  if (value <= MIN_VALUE) {
-    window.alert("You can't have less than 2 people in a beer-ting");
-  } else {
-    setValue(value - 1);
-  }
-};
+import { useStore } from "@/lib/store";
+const useCounter = () => {
+  const {
+    participants,
+    setParticipants,
+    incrementParticipants,
+    decrementParticipants,
+    reset,
+  } = useStore(
+    (store) => ({
+      participants: store.participants,
+      setParticipants: store.setParticipants,
+      incrementParticipants: store.incrementParticipants,
+      decrementParticipants: store.decrementParticipants,
+      reset: store.reset,
+    }),
+    shallow
+  );
 
-const max = (
-  value: number,
-  setValue: { (value: SetStateAction<number>): void; (arg0: number): void }
-) => {
-  if (value >= MAX_VALUE) {
-    window.alert(
-      "You can't have more than 99 people in a beer-ting, It's a party"
-    );
-  } else {
-    setValue(value + 1);
-  }
-};
-
-const minMax = (
-  value: number,
-  setValue: { (value: SetStateAction<number>): void; (arg0: number): void }
-) => {
-  if (value < MIN_VALUE) {
-    window.alert(
-      "You can't have less than 2 people in a beer-ting, It's a party"
-    );
-  } else if (value > MAX_VALUE) {
-    window.alert(
-      "You can't have more than 99 people in a beer-ting, It's a party"
-    );
-  } else {
-    setValue(value);
-  }
-};
-
-const NumberInput = ({}) => {
-  const [value, setValue] = useState(2);
-  const onKeyDown = (e: { key: string }) => {
-    if (e.key == "ArrowUp" || e.key == "ArrowRight") {
-      max(value, setValue);
-    } else if (e.key == "ArrowDown" || e.key == "ArrowLeft") {
-      min(value, setValue);
-    }
+  return {
+    participants,
+    setParticipants,
+    incrementParticipants,
+    decrementParticipants,
+    reset,
   };
+};
+
+const NumberInput = () => {
+  const {
+    participants,
+    incrementParticipants,
+    decrementParticipants,
+    setParticipants,
+    reset,
+  } = useCounter();
+
   return (
     <Box alignSelf="center" direction="row">
       <FormField
@@ -73,18 +58,15 @@ const NumberInput = ({}) => {
       >
         <Box direction="row" gap="small">
           <Button
-            disabled={value <= 2}
+            disabled={participants <= 2}
             primary
             label="-"
-            onClick={() => min(value, setValue)}
+            onClick={decrementParticipants}
           />
           <input
-            onKeyDown={onKeyDown}
-            readOnly
             style={{
               color: "purple",
               fontWeight: 700,
-              // paddingLeft: 5,
               fontSize: "1.2rem",
               width: 50,
               border: "#ccc solid 5px",
@@ -95,14 +77,14 @@ const NumberInput = ({}) => {
             max="100"
             required
             type="number"
-            onChange={(e) => minMax(parseInt(e.target.value), setValue)}
-            value={value}
+            onChange={(e) => setParticipants(parseInt(e.target.value))}
+            value={participants}
           />
           <Button
-            disabled={value >= 99}
+            disabled={participants >= 99}
             primary
             label="+"
-            onClick={() => max(value, setValue)}
+            onClick={incrementParticipants}
           />
         </Box>
       </FormField>

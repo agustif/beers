@@ -1,31 +1,38 @@
 import { Box } from "grommet";
-import { useWeather } from "hooks/useWeather";
+import shallow from "zustand/shallow";
 
-export interface ForecastProps {
-  lat?: number;
-  lon?: number;
-  date?: number;
-}
-const today = new Date().toISOString();
+import { useWeather } from "@/hooks/useWeather";
+import { useStore } from "@/lib/store";
 
-export const Forecast = ({
-  lat = 0,
-  lon = 0,
-  date = Number(new Date().toTimeString()),
-}: ForecastProps) => {
-  const { weather, error, loading } = useWeather({ lat, lon, date });
-  console.log(weather);
+const useShallowStore = () => {
+  const { location, date, reset } = useStore(
+    (store) => ({
+      location: store.location,
+      date: store.date,
+      reset: store.reset,
+    }),
+    shallow
+  );
+
+  return { location, date, reset };
+};
+
+export const Forecast = () => {
+  const { location, date } = useShallowStore();
+
+  const { weather, error, loading } = useWeather({
+    lat: location.lat,
+    lon: location.lon,
+  });
+  console.log(weather, location, date);
   if (error) {
     return <div>Error: {error}</div>;
   }
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Consulting weather api...</div>;
   }
-  // if (weather)
-  return <WeatherForecast weather={weather} />;
+  const temp = weather.daily[0].temp?.day;
+  if (weather) return <Box>Forecast {temp}</Box>;
+  return <Box>No forecast</Box>;
 };
 
-export const WeatherForecast = ({ weather }: { weather: any }) => {
-  console.log("weather", weather);
-  return <Box>Forecast</Box>;
-};
