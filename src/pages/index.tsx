@@ -1,49 +1,28 @@
-import { Avatar, Box, FormField, Heading, Nav, Sidebar } from "grommet";
 import React from "react";
+import { Box } from "grommet";
+import { DirectionType } from "grommet/utils";
 
-import { NumberInput } from "@/components/NumberInput";
-import { DateInput } from "@/components/DateInput";
-import { GeocoderInput } from "@/components/GeocoderInput";
-import { Clock } from "grommet-icons";
+import { Sidebar } from "@/components/Sidebar";
 import { Forecast } from "@/components/Forecast";
+import { DateInput } from "@/components/DateInput";
+import { NumberInput } from "@/components/NumberInput";
+import { GeocoderInput } from "@/components/GeocoderInput";
+
+const layoutProps = {
+  flex: true,
+  direction: "row" as DirectionType,
+  margin: { horizontal: "auto" },
+  width: { max: "100%" },
+  height: { max: "100%" },
+};
+
 const Home = () => {
   return (
-    <Box
-      flex
-      direction="row"
-      margin={{ horizontal: "auto" }}
-      width={{ max: "100%" }}
-      height={{ max: "100%" }}
-      overflow={{ vertical: "scroll" }}
-    >
-      <Sidebar
-        // elevation="large"
-        height={{ height: "100vh" }}
-        width={{ width: "400px", max: "420px", min: "280px" }}
-        // height={{ min: "100%" }}
-        background="brand"
-        round="medium"
-        header={
-          <Box direction="row" align="center" gap="14px" alignSelf="center">
-            <Avatar src="//upload.wikimedia.org/wikipedia/commons/9/9b/Emoji_u1f37b.svg" />
-            <Heading>BEER UP!</Heading>
-          </Box>
-        }
-      >
-        <Nav gap="small">
-          <NumberInput />
-          <GeocoderInput />
-          {/* <FormField
-            contentProps={{ border: false }}
-            label={
-              <Box gap="small" direction="row">
-                <Clock />
-                One ore more days?
-              </Box>
-            }
-          ></FormField> */}
-          <DateInput />
-        </Nav>
+    <Box {...layoutProps}>
+      <Sidebar>
+        <NumberInput />
+        <GeocoderInput />
+        <DateInput />
       </Sidebar>
       <Forecast />
     </Box>
