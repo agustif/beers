@@ -1,23 +1,7 @@
 import { Box } from "grommet";
-import shallow from "zustand/shallow";
 
 import { useWeather } from "@/hooks/useWeather";
-import { useStore } from "@/lib/store";
-
-const useShallowStore = () => {
-  const { beers, participants, location, date, reset } = useStore(
-    (store) => ({
-      location: store.location,
-      date: store.date,
-      participants: store.participants,
-      reset: store.reset,
-      beers: store.beers,
-    }),
-    shallow
-  );
-
-  return { participants, location, date, beers, reset };
-};
+import { useShallowStore } from "@/hooks/useShallowStore";
 
 export const Forecast = () => {
   const { location, date, participants, beers } = useShallowStore();
@@ -42,4 +26,3 @@ export const Forecast = () => {
     );
   return <Box>No forecast</Box>;
 };
-

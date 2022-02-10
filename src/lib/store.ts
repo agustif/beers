@@ -16,7 +16,7 @@ type UseStoreState = typeof initializeStore extends (
   beers: 0,
   participants: 2,
   location: { lat: 0, lon: 0 },
-  date: new Date().toISOString(),
+  date: [new Date().toISOString()],
 };
 
 const zustandContext = createContext<UseStoreState>();

@@ -54,6 +54,7 @@ const GeocoderInput = () => {
     >
       <div style={{ height: "200px", position: "relative" }}>
         <div
+          // Both of these expected errors are due to some version incompatibility of react-map-gl but doen't affect the app
           // @ts-expect-error
           ref={geocoderContainerRef}
           style={{ position: "absolute", top: 20, left: 20, zIndex: 1 }}
@@ -68,7 +69,7 @@ const GeocoderInput = () => {
           mapboxApiAccessToken={MAPBOX_API_ACCESS_TOKEN}
         >
           <Geocoder
-            placeholder="Search meeting location"
+            placeholder="Find  location"
             mapRef={mapRef}
             containerRef={geocoderContainerRef}
             onViewportChange={handleGeocoderViewportChange}

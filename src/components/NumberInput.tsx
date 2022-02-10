@@ -1,34 +1,7 @@
 import { FormField, Box, Button } from "grommet";
-import shallow from "zustand/shallow";
 import { Group } from "grommet-icons";
 
-import { useStore } from "@/lib/store";
-const useCounter = () => {
-  const {
-    participants,
-    setParticipants,
-    incrementParticipants,
-    decrementParticipants,
-    reset,
-  } = useStore(
-    (store) => ({
-      participants: store.participants,
-      setParticipants: store.setParticipants,
-      incrementParticipants: store.incrementParticipants,
-      decrementParticipants: store.decrementParticipants,
-      reset: store.reset,
-    }),
-    shallow
-  );
-
-  return {
-    participants,
-    setParticipants,
-    incrementParticipants,
-    decrementParticipants,
-    reset,
-  };
-};
+import { useShallowStore } from "@/hooks/useShallowStore";
 
 const NumberInput = () => {
   const {
@@ -36,8 +9,7 @@ const NumberInput = () => {
     incrementParticipants,
     decrementParticipants,
     setParticipants,
-    reset,
-  } = useCounter();
+  } = useShallowStore();
 
   return (
     <Box alignSelf="center" direction="row">

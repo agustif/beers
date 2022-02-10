@@ -2,7 +2,7 @@ import { Avatar, Box, FormField, Heading, Nav, Sidebar } from "grommet";
 import React from "react";
 
 import { NumberInput } from "@/components/NumberInput";
-import { RangeOrDateInput } from "@/components/DateInput";
+import { DateInput } from "@/components/DateInput";
 import { GeocoderInput } from "@/components/GeocoderInput";
 import { Clock } from "grommet-icons";
 import { Forecast } from "@/components/Forecast";
@@ -42,7 +42,7 @@ const Home = () => {
               </Box>
             }
           ></FormField> */}
-          <RangeOrDateInput />
+          <DateInput />
         </Nav>
       </Sidebar>
       <Forecast />

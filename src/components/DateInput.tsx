@@ -1,4 +1,10 @@
-import { Box, CalendarType, CheckBox, DateInput, FormField } from "grommet";
+import {
+  Box,
+  CalendarType,
+  CheckBox,
+  DateInput as GrommetDateInput,
+  FormField,
+} from "grommet";
 import { FormSchedule } from "grommet-icons";
 import { useState } from "react";
 
@@ -17,10 +23,9 @@ const calendarProps: CalendarType = {
     new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
   ],
 };
-const RangeOrDateInput = () => {
+const DateInput = () => {
   const [checked, setChecked] = useState(false);
-
-  const DynamicDate = () => {
+  const RangeOrDateInput = () => {
     const label = "Which date" + (checked ? "s" : "") + "?";
     return (
       <FormField
@@ -38,7 +43,7 @@ const RangeOrDateInput = () => {
           onChange={(event) => setChecked(event.target.checked)}
         />
         {checked ? (
-          <DateInput
+          <GrommetDateInput
             size="large"
             inline={true}
             calendarProps={calendarProps}
@@ -51,7 +56,7 @@ const RangeOrDateInput = () => {
             onChange={({ value }) => {}}
           />
         ) : (
-          <DateInput
+          <GrommetDateInput
             size="large"
             inline={true}
             calendarProps={calendarProps}
@@ -65,11 +70,7 @@ const RangeOrDateInput = () => {
     );
   };
 
-  return (
-    <>
-      <DynamicDate />
-    </>
-  );
+  return <RangeOrDateInput />;
 };
 
-export { RangeOrDateInput };
+export { DateInput };
