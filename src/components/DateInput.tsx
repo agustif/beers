@@ -23,6 +23,13 @@ const calendarProps: CalendarType = {
     new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
   ],
 };
+const dateInputDefaultProps = {
+  size: "large",
+  inline: true,
+  calendarProps: calendarProps,
+  style: dateInputStyle,
+};
+
 const DateInput = () => {
   const [checked, setChecked] = useState(false);
   const RangeOrDateInput = () => {
@@ -44,10 +51,7 @@ const DateInput = () => {
         />
         {checked ? (
           <GrommetDateInput
-            size="large"
-            inline={true}
-            calendarProps={calendarProps}
-            style={dateInputStyle}
+            {...dateInputDefaultProps}
             format={"mm/dd/yyyy-mm/dd/yyyy"}
             defaultValue={[
               new Date().toISOString(),
@@ -57,10 +61,7 @@ const DateInput = () => {
           />
         ) : (
           <GrommetDateInput
-            size="large"
-            inline={true}
-            calendarProps={calendarProps}
-            style={dateInputStyle}
+            {...dateInputDefaultProps}
             format={"mm/dd/yyyy"}
             defaultValue={new Date().toISOString()}
             onChange={({ value }) => {}}
