@@ -3,7 +3,7 @@ import { Group } from "grommet-icons";
 
 import { useShallowStore } from "@/hooks/useShallowStore";
 
-const NumberInput = () => {
+export const NumberInput = () => {
   const {
     participants,
     incrementParticipants,
@@ -63,4 +63,3 @@ const NumberInput = () => {
     </Box>
   );
 };
-export { NumberInput };

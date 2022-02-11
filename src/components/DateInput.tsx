@@ -6,12 +6,10 @@ import {
   FormField,
 } from "grommet";
 import { FormSchedule } from "grommet-icons";
-import { useState } from "react";
 
 import { useShallowStore } from "@/hooks/useShallowStore";
 
-const DateInput = () => {
-  // const [checked, setChecked] = useState(false);
+export const DateInput = () => {
   const { date, setDate, multipleDays, setMultipleDays } = useShallowStore();
 
   const setDateInput = ({ value }: { value: string | string[] }) =>
@@ -64,8 +62,6 @@ const DateInput = () => {
 
   return <RangeOrDateInput />;
 };
-
-export { DateInput };
 
 const dateInputStyle = {
   width: "280px",

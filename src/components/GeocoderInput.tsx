@@ -8,7 +8,7 @@ import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import { useStore } from "@/lib/store";
 
 const MAPBOX_API_ACCESS_TOKEN = process.env.MAPBOX_API_ACCESS_TOKEN;
-const GeocoderInput = () => {
+export const GeocoderInput = () => {
   const { setLocation } = useStore();
 
   const [viewport, setViewport] = useState({
@@ -81,5 +81,3 @@ const GeocoderInput = () => {
     </FormField>
   );
 };
-
-export { GeocoderInput };
