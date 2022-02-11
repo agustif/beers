@@ -21,7 +21,8 @@ export const Forecast = () => {
   if (weather)
     return (
       <Box>
-        Forecast {temp} ºC, for {participants} participants, bring {beers} beers
+        Forecast {temp} ºC, on {date}, you should for {participants}{" "}
+        participants, bring {beers} beers
       </Box>
     );
   return <Box>No forecast</Box>;

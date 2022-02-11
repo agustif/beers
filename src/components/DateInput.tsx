@@ -8,32 +8,26 @@ import {
 import { FormSchedule } from "grommet-icons";
 import { useState } from "react";
 
-const dateInputStyle = {
-  width: "280px",
-  maxWidth: "320px",
-  padding: "small",
-};
-const calendarProps: CalendarType = {
-  size: "medium",
-  alignSelf: "center",
-  daysOfWeek: true,
-  fill: true,
-  bounds: [
-    new Date().toISOString(),
-    new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-  ],
-};
-const dateInputDefaultProps = {
-  size: "large",
-  inline: true,
-  calendarProps: calendarProps,
-  style: dateInputStyle,
-};
+import { useShallowStore } from "@/hooks/useShallowStore";
 
 const DateInput = () => {
-  const [checked, setChecked] = useState(false);
+  // const [checked, setChecked] = useState(false);
+  const { date, setDate, multipleDays, setMultipleDays } = useShallowStore();
+
+  const setDateInput = ({ value }: { value: string | string[] }) =>
+    setDate(value);
+
+  const onSetMultipleDays = (event: { target: { checked: boolean } }) => {
+    const boolean = event.target.checked;
+    setMultipleDays(boolean);
+    if (boolean) {
+      setDate([]);
+    } else if (!boolean) {
+      setDate("");
+    }
+  };
   const RangeOrDateInput = () => {
-    const label = "Which date" + (checked ? "s" : "") + "?";
+    const label = "Which date" + (multipleDays ? "s" : "") + "?";
     return (
       <FormField
         label={
@@ -44,27 +38,24 @@ const DateInput = () => {
         }
       >
         <CheckBox
-          checked={checked}
+          checked={multipleDays}
           pad="small"
           label="Multiple day meeting"
-          onChange={(event) => setChecked(event.target.checked)}
+          onChange={onSetMultipleDays}
         />
-        {checked ? (
+        {multipleDays ? (
           <GrommetDateInput
-            {...dateInputDefaultProps}
+            value={date}
+            onChange={setDateInput}
             format={"mm/dd/yyyy-mm/dd/yyyy"}
-            defaultValue={[
-              new Date().toISOString(),
-              new Date(Date.now() + 1 * 24 * 60 * 60 * 1000).toISOString(),
-            ]}
-            onChange={({ value }) => {}}
+            {...dateInputDefaultProps}
           />
         ) : (
           <GrommetDateInput
-            {...dateInputDefaultProps}
             format={"mm/dd/yyyy"}
-            defaultValue={new Date().toISOString()}
-            onChange={({ value }) => {}}
+            value={date}
+            onChange={setDateInput}
+            {...dateInputDefaultProps}
           />
         )}
       </FormField>
@@ -75,3 +66,27 @@ const DateInput = () => {
 };
 
 export { DateInput };
+
+const dateInputStyle = {
+  width: "280px",
+  maxWidth: "320px",
+  padding: "small",
+};
+const calendarProps: CalendarType = {
+  size: "medium",
+  alignSelf: "center",
+  daysOfWeek: true,
+  fill: true,
+  // Free tier of open weather map api only gives 1 week data.
+  // Could add statistical/historical data for dates without real forecast data.
+  bounds: [
+    new Date().toISOString(),
+    new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+  ],
+};
+const dateInputDefaultProps = {
+  size: "medium",
+  inline: true,
+  calendarProps: calendarProps,
+  style: dateInputStyle,
+};

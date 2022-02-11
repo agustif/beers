@@ -16,7 +16,8 @@ type UseStoreState = typeof initializeStore extends (
   beers: 0,
   participants: 2,
   location: { lat: 0, lon: 0 },
-  date: [new Date().toISOString()],
+  date: "" as string | string[],
+  multipleDays: false,
 };
 
 const zustandContext = createContext<UseStoreState>();
@@ -26,10 +27,22 @@ export const useStore = zustandContext.useStore;
 export const initializeStore = (preloadedState = {}) => {
   return create(
     combine({ ...initialState, ...preloadedState }, (set, get) => ({
+      setMultipleDays: (multipleDays: boolean) => {
+        set({ multipleDays });
+        if (multipleDays) {
+          set({ date: [
+                  new Date().toISOString(),
+                  new Date(Date.now() + 1 * 24 * 60 * 60 * 1000).toISOString(),
+                ] });
+        } else {
+          set({ date: new Date().toISOString() });
+        }
+      },
       setLocation: ({lat, lon}:{lat: number, lon: number}) => {
         set({location:{lat, lon}});
       },
-      setParticipants: (participants: number) => { set({participants}); },
+      setDate: (date: string[] | string) => { set({ date }) },
+      setParticipants: (participants: number) => { set({ participants }) },
       incrementParticipants: () => {
         set({
           participants: get().participants + 1,
