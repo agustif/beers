@@ -1,5 +1,7 @@
 import { Box } from "grommet";
 
+
+import { Card } from "@/components/Card";
 import { useWeather } from "@/hooks/useWeather";
 import { useShallowStore } from "@/hooks/useShallowStore";
 
@@ -20,10 +22,9 @@ export const Forecast = () => {
   const temp = weather.daily[0].temp?.day;
   if (weather)
     return (
-      <Box>
-        Forecast {temp} ºC, on {date}, you should for {participants}{" "}
-        participants, bring {beers} beers
-      </Box>
+      <Card
+        header={` Forecast ${temp} ºC, on ${date}, you should for ${participants} participants, bring ${beers} beers`}
+      />
     );
   return <Box>No forecast</Box>;
 };

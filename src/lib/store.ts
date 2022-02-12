@@ -18,6 +18,7 @@ type UseStoreState = typeof initializeStore extends (
   location: { lat: 0, lon: 0 },
   date: "" as string | string[],
   multipleDays: false,
+  weather: {daily:[ {temp: {day: ""} }]},
 };
 
 const zustandContext = createContext<UseStoreState>();
@@ -27,6 +28,7 @@ export const useStore = zustandContext.useStore;
 export const initializeStore = (preloadedState = {}) => {
   return create(
     combine({ ...initialState, ...preloadedState }, (set, get) => ({
+      setWeather: (weather: any) => { set({ weather }) },
       setMultipleDays: (multipleDays: boolean) => {
         set({ multipleDays });
         if (multipleDays) {
