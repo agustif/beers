@@ -2,6 +2,7 @@ import { FormField, Box, Button } from "grommet";
 import { Group } from "grommet-icons";
 
 import { useShallowStore } from "@/hooks/useShallowStore";
+import { useEffect } from "react";
 
 export const NumberInput = () => {
   const {
@@ -9,8 +10,12 @@ export const NumberInput = () => {
     incrementParticipants,
     decrementParticipants,
     setParticipants,
+    setBeers,
   } = useShallowStore();
 
+  useEffect(() => {
+    setBeers();
+  }, [participants]);
   return (
     <Box alignSelf="center" direction="row">
       <FormField

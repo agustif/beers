@@ -2,7 +2,7 @@ import { useLayoutEffect } from "react";
 import create, { UseBoundStore } from "zustand";
 import createContext from "zustand/context";
 import { combine } from "zustand/middleware";
-
+import { BeerOMeter } from "@/utils/beers.util";
 let store: any;
 
 type InitialState = typeof initialState;
@@ -13,7 +13,8 @@ type UseStoreState = typeof initializeStore extends (
   : never;
 
   const initialState = {
-  beers: 0,
+    beers: 0,
+    temp: 0,
   participants: 2,
   location: { lat: 0, lon: 0 },
   date: "" as string | string[],
@@ -28,7 +29,9 @@ export const useStore = zustandContext.useStore;
 export const initializeStore = (preloadedState = {}) => {
   return create(
     combine({ ...initialState, ...preloadedState }, (set, get) => ({
+      setBeers: () => set(() => ({beers:  BeerOMeter(get().temp, get().participants) })),
       setWeather: (weather: any) => { set({ weather }) },
+      setTemp: (temp: any) => { set({ temp }) },
       setMultipleDays: (multipleDays: boolean) => {
         set({ multipleDays });
         if (multipleDays) {

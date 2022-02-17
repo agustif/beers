@@ -8,10 +8,15 @@ import {
 import { FormSchedule } from "grommet-icons";
 
 import { useShallowStore } from "@/hooks/useShallowStore";
+import { useEffect } from "react";
 
 export const DateInput = () => {
-  const { date, setDate, multipleDays, setMultipleDays } = useShallowStore();
+  const { date, setDate, multipleDays, setMultipleDays, setBeers } =
+    useShallowStore();
 
+  useEffect(() => {
+    setBeers();
+  }, [date, multipleDays]);
   const setDateInput = ({ value }: { value: string | string[] }) =>
     setDate(value);
 
